@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"logey.gitee.io","root":"/","scheme":"Gemini","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="Solution for LYOI contest 【2018.9.23】">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【LYOI】20180923 Solution">
+<meta property="og:url" content="https://logey.gitee.io/solution2018123/index.html">
+<meta property="og:site_name" content="Logey&#39;s Blog">
+<meta property="og:description" content="Solution for LYOI contest 【2018.9.23】">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-09-23T09:57:46.000Z">
+<meta property="article:modified_time" content="2018-10-15T23:10:21.208Z">
+<meta property="article:author" content="Logey">
+<meta property="article:tag" content="动态规划">
+<meta property="article:tag" content="线段树">
+<meta property="article:tag" content="solution">
+<meta property="article:tag" content="贪心">
+<meta property="article:tag" content="堆">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://logey.gitee.io/solution2018123/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>【LYOI】20180923 Solution | Logey's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Logey's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Logey's Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/links" rel="section"><i class="fa fa-link fa-fw"></i>友链</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#T1"><span class="nav-number">1.</span> <span class="nav-text">T1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E6%84%8F"><span class="nav-number">1.1.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3"><span class="nav-number">1.2.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81"><span class="nav-number">1.3.</span> <span class="nav-text">完整代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T2"><span class="nav-number">2.</span> <span class="nav-text">T2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E6%84%8F-1"><span class="nav-number">2.1.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3-1"><span class="nav-number">2.2.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">2.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T3"><span class="nav-number">3.</span> <span class="nav-text">T3</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E6%84%8F-2"><span class="nav-number">3.1.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3-2"><span class="nav-number">3.2.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="nav-number">3.3.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Logey"
+      src="/images/yuyi.jpg">
+  <p class="site-author-name" itemprop="name">Logey</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Bad-End" title="gitHub → https:&#x2F;&#x2F;github.com&#x2F;Bad-End" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>gitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1192067795@qq.com" title="E-Mail → mailto:1192067795@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/bad-end-81/activities" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;bad-end-81&#x2F;activities" rel="noopener" target="_blank">Zhihu</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://codeforces.com/profile/Logey" title="Codeforces → http:&#x2F;&#x2F;codeforces.com&#x2F;profile&#x2F;Logey" rel="noopener" target="_blank"><i class="fa fa-code fa-fw"></i>Codeforces</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Bad_Endl" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Bad_Endl" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/profile.php?id=100022236052781" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;profile.php?id&#x3D;100022236052781" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+<!-- hitokoto -->
+
+<div class="hitokoto-title">
+  <i class="fa fa-quote-right"></i>
+  <b>一言</b>
+</div>
+
+<div id="hitokoto">:D 獲取中...</div>
+<i id="hitofrom">:D 獲取中...</i>
+
+<script src="https://cdn.jsdelivr.net/npm/bluebird@3/js/browser/bluebird.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/whatwg-fetch@2.0.3/fetch.min.js"></script>
+<script>
+  fetch('https://v1.hitokoto.cn')
+    .then(function (res){
+      return res.json();
+    })
+    .then(function (data) {
+      var hitokoto = document.getElementById('hitokoto');
+      hitokoto.innerText = '\xa0\xa0\xa0\xa0\xa0\xa0\xa0' + data.hitokoto;
+      var hitofrom = document.getElementById('hitofrom');
+      hitofrom.innerText = "——" + data.from + '\xa0'; 
+    })
+    .catch(function (err) {
+      console.error(err);
+    })
+</script>
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://logey.gitee.io/solution2018123/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/yuyi.jpg">
+      <meta itemprop="name" content="Logey">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Logey's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【LYOI】20180923 Solution
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-09-23 09:57:46" itemprop="dateCreated datePublished" datetime="2018-09-23T09:57:46Z">2018-09-23</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2018-10-15 23:10:21" itemprop="dateModified" datetime="2018-10-15T23:10:21Z">2018-10-15</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>Solution for LYOI contest 【2018.9.23】</p>
+<a id="more"></a>
+
+<h2 id="T1"><a href="#T1" class="headerlink" title="T1"></a>T1</h2><h3 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h3><p>给定一个由括号组成的字符串，有若干次询问，每次询问要求输出从 $[l,r]$ 中选出若干括号，组成的最长的括号序列的长度。（注意是序列不是子串，序列可以不连续）</p>
+<h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>根据面向数据范围编程的原则，发现 $O(m\log_2n)$ 的算法可以过。</p>
+<p>区间问题很容易让人想到线段树，实际上本题符合线段树维护数据的原则，不过需要在查询的时候使用一个技巧。</p>
+<p>线段树的每个节点维护三个信息，分别是本区间内未匹配的左括号数量，未匹配的右括号的数量，以及完成匹配的括号的对数，分别用 $lm,rm,num$ 来表示。</p>
+<p>这类问题的合并是核心，维护了上述三个信息之后不难想到如何合并。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pushUp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> t = <span class="built_in">std</span>::min(lc-&gt;lm, rc-&gt;rm);<span class="comment">//求出左儿子未匹配的左括号和右儿子未匹配的右括号的最小值</span></span><br><span class="line">        num = lc-&gt;num + rc-&gt;num + t;<span class="comment">//合并之后这些括号可以匹配</span></span><br><span class="line">        lm = lc-&gt;lm + rc-&gt;lm - t;<span class="comment">//去掉新匹配的括号</span></span><br><span class="line">        rm = lc-&gt;rm + rc-&gt;rm - t;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>另一个问题是如何查询</p>
+<p>查询 $[l,r]$ 这个区间的答案时，这个区间会被分成若干个长度为 $\text{2}$ 的整数次幂的区间。线段树递归合并的顺序是从左到右的，那么我们可以记录已经处理的当前区间左边区间的 $lm,rm,num$ ，再把当前区间和左边这个区间合并即可。</p>
+<p>贴代码</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right, SegmentTree *&amp;k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (left == l &amp;&amp; r == right) &#123;</span><br><span class="line">            <span class="keyword">int</span> t = <span class="built_in">std</span>::min(k-&gt;lm, rm);<span class="comment">//和pushUp一模一样的合并操作</span></span><br><span class="line">            k-&gt;num = k-&gt;num + num + t;</span><br><span class="line">            k-&gt;lm = k-&gt;lm + lm - t;</span><br><span class="line">            k-&gt;rm = k-&gt;rm + rm - t;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (right &lt;= mid) lc-&gt;query(left, right, k);<span class="comment">//线段树我就不讲了吧</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (left &gt; mid) rc-&gt;query(left, right, k);</span><br><span class="line">        <span class="keyword">else</span> lc-&gt;query(left, mid, k), rc-&gt;query(mid + <span class="number">1</span>, right, k);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">4e5</span> + <span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SegmentTree</span>;</span></span><br><span class="line"><span class="keyword">char</span> str[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function">SegmentTree* <span class="title">newNode</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r, SegmentTree *lc, SegmentTree *rc)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SegmentTree</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> l, r, mid;</span><br><span class="line">    <span class="keyword">int</span> lm, rm, num;</span><br><span class="line">    SegmentTree *lc, *rc;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> SegmentTree *<span class="title">build</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (l == r) <span class="keyword">return</span> newNode(l, r, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line">        <span class="keyword">int</span> mid = l + (r - l) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">return</span> newNode(l, r, build(l, mid), build(mid + <span class="number">1</span>, r));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">pushUp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> t = <span class="built_in">std</span>::min(lc-&gt;lm, rc-&gt;rm);</span><br><span class="line">        num = lc-&gt;num + rc-&gt;num + t;</span><br><span class="line">        lm = lc-&gt;lm + rc-&gt;lm - t;</span><br><span class="line">        rm = lc-&gt;rm + rc-&gt;rm - t;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (l == r) &#123;</span><br><span class="line">            <span class="keyword">if</span> (str[l] == <span class="string">&#x27;(&#x27;</span>) lm++;</span><br><span class="line">            <span class="keyword">else</span> rm++;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        lc-&gt;init(), rc-&gt;init();</span><br><span class="line">        pushUp();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right, SegmentTree *&amp;k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (left == l &amp;&amp; r == right) &#123;</span><br><span class="line">            <span class="keyword">int</span> t = <span class="built_in">std</span>::min(k-&gt;lm, rm);</span><br><span class="line">            k-&gt;num = k-&gt;num + num + t;</span><br><span class="line">            k-&gt;lm = k-&gt;lm + lm - t;</span><br><span class="line">            k-&gt;rm = k-&gt;rm + rm - t;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (right &lt;= mid) lc-&gt;query(left, right, k);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (left &gt; mid) rc-&gt;query(left, right, k);</span><br><span class="line">        <span class="keyword">else</span> lc-&gt;query(left, mid, k), rc-&gt;query(mid + <span class="number">1</span>, right, k);</span><br><span class="line">    &#125;</span><br><span class="line">&#125; *root, pool[MAXN &lt;&lt; <span class="number">1</span>], *tail = pool, *k;</span><br><span class="line"></span><br><span class="line"><span class="function">SegmentTree* <span class="title">newNode</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r, SegmentTree *lc, SegmentTree *rc)</span> </span>&#123;</span><br><span class="line">    SegmentTree *ret = ++tail;</span><br><span class="line">    ret-&gt;l = l, ret-&gt;r = r, ret-&gt;mid = l + (r - l) / <span class="number">2</span>;</span><br><span class="line">    ret-&gt;lm = ret-&gt;rm = ret-&gt;num = <span class="number">0</span>;</span><br><span class="line">    ret-&gt;lc = lc, ret-&gt;rc = rc;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, m;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;n, &amp;m);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, str + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">int</span> l, r;</span><br><span class="line">    k = newNode(<span class="number">1</span>, n, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line">    root = SegmentTree::build(<span class="number">1</span>, n);</span><br><span class="line">    root-&gt;init();</span><br><span class="line">    <span class="keyword">while</span> (m--) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;l, &amp;r);</span><br><span class="line">        k-&gt;lm = k-&gt;rm = k-&gt;num = <span class="literal">false</span>;</span><br><span class="line">        root-&gt;query(l, r, k);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, k-&gt;num &lt;&lt; <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="T2"><a href="#T2" class="headerlink" title="T2"></a>T2</h2><h3 id="题意-1"><a href="#题意-1" class="headerlink" title="题意"></a>题意</h3><p>给定 $\text{n}$ 个收益都为 $\text{1}$ 的物品，以及 $\text{n}$ 组 $b_i,k_i$ ，表示对于第 $\text{i}$ 个物品，可以花$b_i+k_i$个金币进行购买，其中 $b_i$ 比较珍贵，要尽可能少使用。</p>
+<p>给定 $\text{m}$ 种购买途径，每种途径只能用一次。 $a_i$ 表示第 $\text{i}$ 种途径需要花费的金币数量。</p>
+<p>求最多能购买的物品数量和满足购买的物品最多的前提下最小的 $b_i$ 消耗和。</p>
+<h3 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h3><p>对于第一问，把 $a_i$ 排序，然后依次处理。</p>
+<p>对于 $a_i$ ，显然使用这种途径去买能买的物品中$b_i+k_i$最小的是最优的，这样就求出了最大物品数。</p>
+<p>对于第二问，将使用的购买方法取出，按ai从大到小依次贪心，在物品中选择可以使用当前购买方法的且 $k_i$ 最大的物品，可以用堆实现 。</p>
+<p>具体细节看代码吧。</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;climits&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">2e5</span> + <span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> b, k;</span><br><span class="line">&#125; h[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a[MAXN];</span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(Node a, Node b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a.k + a.b &lt; b.k + b.b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;n, &amp;m);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;h[i].b);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;h[i].k);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">std</span>::sort(h + <span class="number">1</span>, h + n + <span class="number">1</span>, cmp);</span><br><span class="line">    <span class="built_in">std</span>::sort(a + <span class="number">1</span>, a + m + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">int</span> cnt = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (h[i].k + h[i].b &gt;= a[cnt] &amp;&amp; cnt &lt;= m) &#123;</span><br><span class="line">            cnt++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cnt--;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, cnt);</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">priority_queue</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = n; i &gt;= <span class="number">1</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">while</span> (h[i].k + h[i].b &lt; a[cnt] &amp;&amp; cnt &gt;= <span class="number">1</span>) &#123;</span><br><span class="line">            sum += <span class="built_in">std</span>::max(a[cnt--] - q.top(), <span class="number">0</span>);</span><br><span class="line">            q.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (h[i].k + h[i].b &gt;= a[cnt]) &#123;</span><br><span class="line">            q.push(h[i].k);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (cnt &gt;= <span class="number">1</span>) &#123;</span><br><span class="line">        sum += <span class="built_in">std</span>::max(a[cnt--] - q.top(), <span class="number">0</span>);</span><br><span class="line">        q.pop();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, sum);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="T3"><a href="#T3" class="headerlink" title="T3"></a>T3</h2><h3 id="题意-2"><a href="#题意-2" class="headerlink" title="题意"></a>题意</h3><p>给定 $s,p$ 两个字符串，求在 $s$ 串中删除若干字符后的 $p$ 串的数量。</p>
+<h3 id="题解-2"><a href="#题解-2" class="headerlink" title="题解"></a>题解</h3><p>无脑 $\text{DP}$ 啊QAQ</p>
+<p>设 $f[i][j]$ 表示 $s$ 的前 $i$ 个字符中，删去 $j$ 个字符之后 $p$ 串的最大数量。</p>
+<p>设 $w[i]$ 表示从 $s$ 的第 $i$ 个字符开始，最小的可以通过删除某些字符来得到 $p$ 串的字符串长度。</p>
+<p>转移也很显然了</p>
+<ul>
+<li><p>不删除，对答案无影响</p>
+<p>$$ f[i+1][j]=\max(f[i+1][j],f[i][j]) $$ </p>
+</li>
+<li><p>删除，对答案无影响</p>
+<p>$$ f[i+1][j+1]=\max(f[i+1][j+1],f[i][j]) $$ </p>
+</li>
+<li><p>删除，对答案有影响</p>
+<p>$$ f[i+w[i]][j+w[i]-|p|]=\max(f[i+w[i])[j+w[i]-|p|],f[i][j]+1) $$ </p>
+</li>
+</ul>
+<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">2e3</span> + <span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> s[MAXN], p[MAXN];</span><br><span class="line"><span class="keyword">int</span> f[MAXN][MAXN], w[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%s %s&quot;</span>, s, p);</span><br><span class="line">    <span class="keyword">int</span> n = <span class="built_in">strlen</span>(s), m = <span class="built_in">strlen</span>(p);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> t = <span class="number">0</span>;</span><br><span class="line">        w[i] = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt; n; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (s[j] == p[t]) t++;</span><br><span class="line">            <span class="keyword">if</span> (t == m) &#123;</span><br><span class="line">                w[i] = j - i + <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= i; j++) &#123;</span><br><span class="line">            f[i + <span class="number">1</span>][j] = <span class="built_in">std</span>::max(f[i + <span class="number">1</span>][j], f[i][j]);</span><br><span class="line">            f[i + <span class="number">1</span>][j + <span class="number">1</span>] = <span class="built_in">std</span>::max(f[i + <span class="number">1</span>][j + <span class="number">1</span>], f[i][j]);</span><br><span class="line">            <span class="keyword">if</span> (w[i] &gt; <span class="number">0</span>)</span><br><span class="line">                f[i + w[i]][j + w[i] - m] = <span class="built_in">std</span>::max(f[i][j] + <span class="number">1</span>, f[i + w[i]][j + w[i] - m]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, f[n][i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, f[n][n]);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Logey
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://logey.gitee.io/solution2018123/" title="【LYOI】20180923 Solution">https://logey.gitee.io/solution2018123/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag"># 动态规划</a>
+              <a href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag"># 线段树</a>
+              <a href="/tags/solution/" rel="tag"># solution</a>
+              <a href="/tags/%E8%B4%AA%E5%BF%83/" rel="tag"># 贪心</a>
+              <a href="/tags/%E5%A0%86/" rel="tag"># 堆</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/solution/" rel="prev" title="【LYOI】20180916T2 Solution">
+                  <i class="fa fa-chevron-left"></i> 【LYOI】20180916T2 Solution
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/November-First/" rel="next" title="【LYOI】20181101 Solution">
+                  【LYOI】20181101 Solution <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Logey</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+      <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

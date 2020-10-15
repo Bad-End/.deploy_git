@@ -19,7 +19,7 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"logey.gitee.io","root":"/","scheme":"Mist","version":"8.0.1","exturl":false,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+    var CONFIG = {"hostname":"logey.gitee.io","root":"/","scheme":"Gemini","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 
   <meta property="og:type" content="website">
@@ -221,7 +221,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">42</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -259,6 +259,33 @@
 
 
 
+<!-- hitokoto -->
+
+<div class="hitokoto-title">
+  <i class="fa fa-quote-right"></i>
+  <b>一言</b>
+</div>
+
+<div id="hitokoto">:D 獲取中...</div>
+<i id="hitofrom">:D 獲取中...</i>
+
+<script src="https://cdn.jsdelivr.net/npm/bluebird@3/js/browser/bluebird.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/whatwg-fetch@2.0.3/fetch.min.js"></script>
+<script>
+  fetch('https://v1.hitokoto.cn')
+    .then(function (res){
+      return res.json();
+    })
+    .then(function (data) {
+      var hitokoto = document.getElementById('hitokoto');
+      hitokoto.innerText = '\xa0\xa0\xa0\xa0\xa0\xa0\xa0' + data.hitokoto;
+      var hitofrom = document.getElementById('hitofrom');
+      hitofrom.innerText = "——" + data.from + '\xa0'; 
+    })
+    .catch(function (err) {
+      console.error(err);
+    })
+</script>
       </section>
     </div>
   </aside>
@@ -289,10 +316,154 @@
   <div class="post-block">
     <div class="post-content">
       <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 25 篇日志。 继续努力。</span>
+        
+        <span class="collection-header">还行! 目前共计 42 篇日志。 继续努力。</span>
       </div>
 
       
+    <div class="collection-year">
+      <span class="collection-header">2020</span>
+    </div>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2020-10-15T00:00:00Z"
+              content="2020-10-15">
+          10-15
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2020.9.25/" itemprop="url">
+            <span itemprop="name">2020.9.25笔记</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2020-10-15T00:00:00Z"
+              content="2020-10-15">
+          10-15
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2020.9.27/" itemprop="url">
+            <span itemprop="name">2020.9.27笔记</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2020-10-15T00:00:00Z"
+              content="2020-10-15">
+          10-15
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2020.9.28/" itemprop="url">
+            <span itemprop="name">2020.9.28笔记</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2020-10-15T00:00:00Z"
+              content="2020-10-15">
+          10-15
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/JZOJ5394/" itemprop="url">
+            <span itemprop="name">【JZOJ5394】</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2020-10-15T00:00:00Z"
+              content="2020-10-15">
+          10-15
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/JZOJ5908/" itemprop="url">
+            <span itemprop="name">【JZOI5908】开荒</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2020-10-15T00:00:00Z"
+              content="2020-10-15">
+          10-15
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/JZOJ6281/" itemprop="url">
+            <span itemprop="name">【JZOJ6281】 串</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2020-10-15T00:00:00Z"
+              content="2020-10-15">
+          10-15
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/ZR1217/" itemprop="url">
+            <span itemprop="name">【ZROJ1217】</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
     <div class="collection-year">
       <span class="collection-header">2018</span>
     </div>
@@ -301,15 +472,15 @@
     <header class="post-header">
       <div class="post-meta-container">
         <time itemprop="dateCreated"
-              datetime="2018-07-20T22:10:03Z"
-              content="2018-07-20">
-          07-20
+              datetime="2018-11-18T13:40:10Z"
+              content="2018-11-18">
+          11-18
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2018/07/21/Treap/" itemprop="url">
-            <span itemprop="name">Treap学习笔记</span>
+          <a class="post-title-link" href="/hh-necklace/" itemprop="url">
+            <span itemprop="name">【SDOI2009】HH的项链</span>
           </a>
       </div>
 
@@ -321,15 +492,15 @@
     <header class="post-header">
       <div class="post-meta-container">
         <time itemprop="dateCreated"
-              datetime="2018-07-20T08:19:36Z"
-              content="2018-07-20">
-          07-20
+              datetime="2018-11-18T11:30:48Z"
+              content="2018-11-18">
+          11-18
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2018/07/20/%E4%BD%8D%E8%BF%90%E7%AE%97%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" itemprop="url">
-            <span itemprop="name">位运算（一）</span>
+          <a class="post-title-link" href="/king-of-hotels/" itemprop="url">
+            <span itemprop="name">【LuoguP1402】酒店之王</span>
           </a>
       </div>
 
@@ -341,155 +512,15 @@
     <header class="post-header">
       <div class="post-meta-container">
         <time itemprop="dateCreated"
-              datetime="2018-07-16T07:57:28Z"
-              content="2018-07-16">
-          07-16
+              datetime="2018-11-17T21:23:59Z"
+              content="2018-11-17">
+          11-17
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2018/07/16/st/" itemprop="url">
-            <span itemprop="name">【模板】ST表</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2018-07-15T06:59:14Z"
-              content="2018-07-15">
-          07-15
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2018/07/15/squirrel/" itemprop="url">
-            <span itemprop="name">【JSOI2014】松鼠的新家</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2018-07-05T15:50:54Z"
-              content="2018-07-05">
-          07-05
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2018/07/05/bipartite-graph/" itemprop="url">
-            <span itemprop="name">二分图学习笔记</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2018-06-22T22:00:41Z"
-              content="2018-06-22">
-          06-22
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2018/06/23/tree-chain-split/" itemprop="url">
-            <span itemprop="name">【模板】树链剖分</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2018-06-01T16:40:04Z"
-              content="2018-06-01">
-          06-01
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2018/06/02/%E3%80%90NOI2010%E3%80%91%E8%B6%85%E7%BA%A7%E9%92%A2%E7%90%B4/" itemprop="url">
-            <span itemprop="name">【NOI2010】超级钢琴</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2018-05-05T21:43:10Z"
-              content="2018-05-05">
-          05-05
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2018/05/06/SegmentTree/" itemprop="url">
-            <span itemprop="name">【模板】线段树</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2018-03-17T13:24:52Z"
-              content="2018-03-17">
-          03-17
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2018/03/17/%E3%80%90USACO5.3%E3%80%91%E6%A0%A1%E5%9B%AD%E7%BD%91Network%20of%20Schools/" itemprop="url">
-            <span itemprop="name">【USACO5.3】校园网Network of Schools</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2018-02-22T16:52:44Z"
-              content="2018-02-22">
-          02-22
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2018/02/23/%E6%9C%80%E5%B0%8F%E7%8E%AF/" itemprop="url">
-            <span itemprop="name">【HNOI2009】最小环</span>
+          <a class="post-title-link" href="/noip2018/" itemprop="url">
+            <span itemprop="name">noip2018总结与反思</span>
           </a>
       </div>
 
@@ -506,7 +537,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/archives/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/5/">5</a><a class="extend next" rel="next" href="/archives/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -559,7 +590,7 @@
 
   
   <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   
 

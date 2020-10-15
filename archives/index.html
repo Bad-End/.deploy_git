@@ -19,7 +19,7 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"logey.gitee.io","root":"/","scheme":"Mist","version":"8.0.1","exturl":false,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+    var CONFIG = {"hostname":"logey.gitee.io","root":"/","scheme":"Gemini","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 
   <meta property="og:type" content="website">
@@ -221,7 +221,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">42</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -259,6 +259,33 @@
 
 
 
+<!-- hitokoto -->
+
+<div class="hitokoto-title">
+  <i class="fa fa-quote-right"></i>
+  <b>一言</b>
+</div>
+
+<div id="hitokoto">:D 獲取中...</div>
+<i id="hitofrom">:D 獲取中...</i>
+
+<script src="https://cdn.jsdelivr.net/npm/bluebird@3/js/browser/bluebird.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/whatwg-fetch@2.0.3/fetch.min.js"></script>
+<script>
+  fetch('https://v1.hitokoto.cn')
+    .then(function (res){
+      return res.json();
+    })
+    .then(function (data) {
+      var hitokoto = document.getElementById('hitokoto');
+      hitokoto.innerText = '\xa0\xa0\xa0\xa0\xa0\xa0\xa0' + data.hitokoto;
+      var hitofrom = document.getElementById('hitofrom');
+      hitofrom.innerText = "——" + data.from + '\xa0'; 
+    })
+    .catch(function (err) {
+      console.error(err);
+    })
+</script>
       </section>
     </div>
   </aside>
@@ -289,27 +316,28 @@
   <div class="post-block">
     <div class="post-content">
       <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 25 篇日志。 继续努力。</span>
+        
+        <span class="collection-header">还行! 目前共计 42 篇日志。 继续努力。</span>
       </div>
 
       
     <div class="collection-year">
-      <span class="collection-header">2018</span>
+      <span class="collection-header">2020</span>
     </div>
 
   <article itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
       <div class="post-meta-container">
         <time itemprop="dateCreated"
-              datetime="2018-11-18T13:40:10Z"
-              content="2018-11-18">
-          11-18
+              datetime="2020-10-15T21:11:32Z"
+              content="2020-10-15">
+          10-15
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2018/11/18/hh-necklace/" itemprop="url">
-            <span itemprop="name">【SDOI2009】HH的项链</span>
+          <a class="post-title-link" href="/2020.10.15/" itemprop="url">
+            <span itemprop="name">2020.10.15笔记</span>
           </a>
       </div>
 
@@ -321,15 +349,15 @@
     <header class="post-header">
       <div class="post-meta-container">
         <time itemprop="dateCreated"
-              datetime="2018-11-18T11:30:48Z"
-              content="2018-11-18">
-          11-18
+              datetime="2020-10-15T00:00:00Z"
+              content="2020-10-15">
+          10-15
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2018/11/18/king-of-hotels/" itemprop="url">
-            <span itemprop="name">【LuoguP1402】酒店之王</span>
+          <a class="post-title-link" href="/2020.10.1/" itemprop="url">
+            <span itemprop="name">2020.10.1笔记</span>
           </a>
       </div>
 
@@ -341,15 +369,15 @@
     <header class="post-header">
       <div class="post-meta-container">
         <time itemprop="dateCreated"
-              datetime="2018-11-17T21:23:59Z"
-              content="2018-11-17">
-          11-17
+              datetime="2020-10-15T00:00:00Z"
+              content="2020-10-15">
+          10-15
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2018/11/18/noip2018/" itemprop="url">
-            <span itemprop="name">noip2018总结与反思</span>
+          <a class="post-title-link" href="/2020.10.12/" itemprop="url">
+            <span itemprop="name">2020.10.12笔记</span>
           </a>
       </div>
 
@@ -361,15 +389,15 @@
     <header class="post-header">
       <div class="post-meta-container">
         <time itemprop="dateCreated"
-              datetime="2018-11-01T08:28:18Z"
-              content="2018-11-01">
-          11-01
+              datetime="2020-10-15T00:00:00Z"
+              content="2020-10-15">
+          10-15
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2018/11/01/November-First/" itemprop="url">
-            <span itemprop="name">【LYOI】20181101 Solution</span>
+          <a class="post-title-link" href="/2020.10.13/" itemprop="url">
+            <span itemprop="name">2020.10.13笔记</span>
           </a>
       </div>
 
@@ -381,15 +409,15 @@
     <header class="post-header">
       <div class="post-meta-container">
         <time itemprop="dateCreated"
-              datetime="2018-09-23T09:57:46Z"
-              content="2018-09-23">
-          09-23
+              datetime="2020-10-15T00:00:00Z"
+              content="2020-10-15">
+          10-15
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2018/09/23/solution2018123/" itemprop="url">
-            <span itemprop="name">【LYOI】20180923 Solution</span>
+          <a class="post-title-link" href="/2020.10.2/" itemprop="url">
+            <span itemprop="name">2020.10.2 笔记</span>
           </a>
       </div>
 
@@ -401,15 +429,15 @@
     <header class="post-header">
       <div class="post-meta-container">
         <time itemprop="dateCreated"
-              datetime="2018-09-16T08:38:29Z"
-              content="2018-09-16">
-          09-16
+              datetime="2020-10-15T00:00:00Z"
+              content="2020-10-15">
+          10-15
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2018/09/16/solution/" itemprop="url">
-            <span itemprop="name">【LYOI】20180916T2 Solution</span>
+          <a class="post-title-link" href="/2020.10.3/" itemprop="url">
+            <span itemprop="name">2020.10.3笔记</span>
           </a>
       </div>
 
@@ -421,15 +449,15 @@
     <header class="post-header">
       <div class="post-meta-container">
         <time itemprop="dateCreated"
-              datetime="2018-09-15T09:32:41Z"
-              content="2018-09-15">
-          09-15
+              datetime="2020-10-15T00:00:00Z"
+              content="2020-10-15">
+          10-15
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2018/09/15/AHOI2017gift/" itemprop="url">
-            <span itemprop="name">【AHOI2017/HNOI2017】礼物</span>
+          <a class="post-title-link" href="/2020.10.4/" itemprop="url">
+            <span itemprop="name">2020.10.4笔记</span>
           </a>
       </div>
 
@@ -441,15 +469,15 @@
     <header class="post-header">
       <div class="post-meta-container">
         <time itemprop="dateCreated"
-              datetime="2018-08-31T10:35:33Z"
-              content="2018-08-31">
-          08-31
+              datetime="2020-10-15T00:00:00Z"
+              content="2020-10-15">
+          10-15
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2018/08/31/water/" itemprop="url">
-            <span itemprop="name">【NOIP2010】引水入城</span>
+          <a class="post-title-link" href="/2020.10.5/" itemprop="url">
+            <span itemprop="name">2020.10.5笔记</span>
           </a>
       </div>
 
@@ -461,15 +489,15 @@
     <header class="post-header">
       <div class="post-meta-container">
         <time itemprop="dateCreated"
-              datetime="2018-08-04T16:03:17Z"
-              content="2018-08-04">
-          08-04
+              datetime="2020-10-15T00:00:00Z"
+              content="2020-10-15">
+          10-15
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2018/08/05/EXSegmentTree/" itemprop="url">
-            <span itemprop="name">线段树</span>
+          <a class="post-title-link" href="/2020.10.6/" itemprop="url">
+            <span itemprop="name">2020.10.6笔记</span>
           </a>
       </div>
 
@@ -481,15 +509,15 @@
     <header class="post-header">
       <div class="post-meta-container">
         <time itemprop="dateCreated"
-              datetime="2018-08-02T09:47:13Z"
-              content="2018-08-02">
-          08-02
+              datetime="2020-10-15T00:00:00Z"
+              content="2020-10-15">
+          10-15
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2018/08/02/transportation-plan/" itemprop="url">
-            <span itemprop="name">【NOIP2015】运输计划</span>
+          <a class="post-title-link" href="/2020.10.9/" itemprop="url">
+            <span itemprop="name">2020.10.9笔记</span>
           </a>
       </div>
 
@@ -506,7 +534,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/5/">5</a><a class="extend next" rel="next" href="/archives/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -559,7 +587,7 @@
 
   
   <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   
 

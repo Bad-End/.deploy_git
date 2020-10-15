@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"logey.gitee.io","root":"/","scheme":"Gemini","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="NOIP2018游记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="noip2018总结与反思">
+<meta property="og:url" content="https://logey.gitee.io/noip2018/index.html">
+<meta property="og:site_name" content="Logey&#39;s Blog">
+<meta property="og:description" content="NOIP2018游记">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-11-17T21:23:59.000Z">
+<meta property="article:modified_time" content="2018-11-17T15:18:36.986Z">
+<meta property="article:author" content="Logey">
+<meta property="article:tag" content="游记">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://logey.gitee.io/noip2018/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>noip2018总结与反思 | Logey's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Logey's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Logey's Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/links" rel="section"><i class="fa fa-link fa-fw"></i>友链</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Day0"><span class="nav-number">1.</span> <span class="nav-text">Day0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Day1"><span class="nav-number">2.</span> <span class="nav-text">Day1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Day2"><span class="nav-number">3.</span> <span class="nav-text">Day2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E6%80%9D"><span class="nav-number">4.</span> <span class="nav-text">反思</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%90%8E"><span class="nav-number">5.</span> <span class="nav-text">最后</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Logey"
+      src="/images/yuyi.jpg">
+  <p class="site-author-name" itemprop="name">Logey</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Bad-End" title="gitHub → https:&#x2F;&#x2F;github.com&#x2F;Bad-End" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>gitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1192067795@qq.com" title="E-Mail → mailto:1192067795@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/bad-end-81/activities" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;bad-end-81&#x2F;activities" rel="noopener" target="_blank">Zhihu</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://codeforces.com/profile/Logey" title="Codeforces → http:&#x2F;&#x2F;codeforces.com&#x2F;profile&#x2F;Logey" rel="noopener" target="_blank"><i class="fa fa-code fa-fw"></i>Codeforces</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Bad_Endl" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Bad_Endl" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/profile.php?id=100022236052781" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;profile.php?id&#x3D;100022236052781" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+<!-- hitokoto -->
+
+<div class="hitokoto-title">
+  <i class="fa fa-quote-right"></i>
+  <b>一言</b>
+</div>
+
+<div id="hitokoto">:D 獲取中...</div>
+<i id="hitofrom">:D 獲取中...</i>
+
+<script src="https://cdn.jsdelivr.net/npm/bluebird@3/js/browser/bluebird.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/whatwg-fetch@2.0.3/fetch.min.js"></script>
+<script>
+  fetch('https://v1.hitokoto.cn')
+    .then(function (res){
+      return res.json();
+    })
+    .then(function (data) {
+      var hitokoto = document.getElementById('hitokoto');
+      hitokoto.innerText = '\xa0\xa0\xa0\xa0\xa0\xa0\xa0' + data.hitokoto;
+      var hitofrom = document.getElementById('hitofrom');
+      hitofrom.innerText = "——" + data.from + '\xa0'; 
+    })
+    .catch(function (err) {
+      console.error(err);
+    })
+</script>
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://logey.gitee.io/noip2018/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/yuyi.jpg">
+      <meta itemprop="name" content="Logey">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Logey's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          noip2018总结与反思
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2018-11-17 21:23:59 / 修改时间：15:18:36" itemprop="dateCreated datePublished" datetime="2018-11-17T21:23:59Z">2018-11-17</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>NOIP2018游记</p>
+<a id="more"></a>
+
+<h2 id="Day0"><a href="#Day0" class="headerlink" title="Day0"></a>Day0</h2><p>从上午8点左右，一直颠到下午1点才到昌邑一中。</p>
+<p>前一天机房里就疯狂出橙，我死活不出= =，坐车的时候zzh还大喊“我出橙了！还是金橙！”</p>
+<p>我：“mmp，欧吃矛”</p>
+<p>团长说我没出橙说明我把rp攒到noip考场上了</p>
+<p>食堂里的饭和SDSC2018的时候的饭基本没什么变化，还是那么油腻以及有大量菌类= =</p>
+<p>去主楼抽签之前，我奶我自己在昌邑一中考试，结果抽到了潍坊工业学校= =，还TM是除了备用考场之外最后一个考场= =</p>
+<p>下午在一个都是鸽子的亭子周围和好多人面基了，我也忘了牌子上写的是什么了，姑且就叫它鸽子亭吧(手动滑稽)</p>
+<p>以下是我认识的鸽亭面基大会的成员：</p>
+<p>wqy,tqc,rqy,hzy,cjc,tqc,yt,dzm,refun,hc</p>
+<p>晚上试机的时候，巴车延迟了= =</p>
+<p>在等巴车的时候据说还有人在签到，吐槽一下昌邑一中的办事效率</p>
+<p>比较庆幸的是考试用win7，还和wqy神犇一个考场</p>
+<p>键盘键程超级短，前一天还在用青轴的我感到极度不适。</p>
+<p>试机的时候写了一发线段树和lis，旁边的小哥在写最短路</p>
+<p>回去的时候在群里看到sqy神仙试机30分钟的时间就写出了rbt ，orz</p>
+<p>回宿舍洗刷完就关灯躺床上打算睡觉了，但是前几天睡的比较晚，生物钟调不过来，然后聊天聊到11点多才睡</p>
+<h2 id="Day1"><a href="#Day1" class="headerlink" title="Day1"></a>Day1</h2><p>早上不知道因为什么四点来钟就行了，躺床上想再睡会但是一直睡不着，盖着被还是感觉很冷。</p>
+<p>无比清醒地躺倒6点多才和大家一起起床吃饭</p>
+<p>吃完早餐去餐厅楼下买了一瓶景甜，一罐红牛，一瓶脉动，很怕自己考场上睡着，再超市找了好几圈才找到红牛</p>
+<p>耽误了时间，差点没赶上班车。。。</p>
+<p>开始考试的时候挺紧张的，虽然今年只是练兵，无关紧要，但还是想要考好</p>
+<p>T1拿到题就出来怎么做了，然后没想好拿什么维护就直接开始写线段树= =，虽然十分钟就写完了，但是怕被卡常还是老老实实换成了st表。换成st表反而还调了很久= =，维护下标没写过几次</p>
+<p>T2读完题没想出来是什么意思，然后读了两三遍之后发现就是删去里面可以被其他数若干倍和表示的就可以了。然后满脑子数论，“大凯的疑惑？”。然后想到一个数的倍数，两个数的倍数和，三个数的倍数和……</p>
+<p>听团长昨晚在宿舍里提了一嘴裴蜀定理，`然后就满脸自闭地推式子，发现并不会做= =，死活想不到是个完全背包</p>
+<p>然后打了前三十分开始看下一题。</p>
+<p>T3读错题了，考场上没看到要首尾相接，但还是觉得是个二分答案，但是考场上愣是没想到怎么检验，我还以为像去年普及组T4一样dp检验，但是没想出来方程和转移。部分分写了链和m=1的40分。m=1的部分分一开始还写假了，输出边权和= =，最后十分钟才发现选一条最长的，然后收卷前五分钟写完树的直径= =</p>
+<p>还有就是链上的二分答案我怕写挂，是这么写的（跑民间数据的时候稳得一批）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> l = min, r = sum, mid;</span><br><span class="line">    <span class="keyword">while</span> (r - l &gt; <span class="number">4</span>) &#123;</span><br><span class="line">        mid = (l + r) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (check1(mid)) l = mid;</span><br><span class="line">        <span class="keyword">else</span> r = mid - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = r; i &gt;= l; i--)&#123;</span><br><span class="line">        <span class="keyword">if</span> (check1(i)) &#123;</span><br><span class="line">            mid = i;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, mid);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>出考场之后wqy告诉我贪心检验，记一下最长剩余权值= =</p>
+<p>Day1：100 + 30 + 40滚粗</p>
+<p>晚上在宿舍里满脑子Day2翻盘</p>
+<p>和昨晚一样早躺在床上但是睡不着</p>
+<h2 id="Day2"><a href="#Day2" class="headerlink" title="Day2"></a>Day2</h2><p>早上6点来钟就醒了，手机闹钟过了几分钟才响</p>
+<p>照例买了红牛和景甜，但是没买脉动，三瓶太多喝不了</p>
+<p>等颓子ycy看番，差点真赶不上班车，迟到×2，团长和ycy的车已经出发了</p>
+<p>在考场上心态挺崩的，满脑子想着Day2翻盘</p>
+<p>T1树的那部分分挺好拿的，优先队列维护出边dfs就可以了，考场上几分钟写完，时间复杂的O(nlogn)</p>
+<p>然后开始想基环树的那40分，满脑子想着怎么贪心，没看到枚举断边就可以过，一个半小时之后觉得再想就亏了，扔了开始看T2和T3，这时候其实就很紧张了</p>
+<p>T2题面很长我还没读懂，但貌似是个数学题我就觉得不太可做，读了两三遍之后扔了开始看T3，事后发现很多神仙也放弃T2了</p>
+<p>T3我一开始读错题了，还以为是个裸的二分图染色，敲完之后开始带样例，小样例带过，大样例挂了之后发现不对劲了。</p>
+<p>挂掉之后有点不知所措，看着数据约定的表格不知道该写哪一部分，几分钟之后才回过神来写前五十分。</p>
+<p>前五十分是每次询问跑一遍dp，貌似和没有上司的舞会差不多。考场上写挂了，样例都带不过去，心态崩到不知道怎么调试，干等着肉眼看到收卷</p>
+<p>Day2:60滚粗</p>
+<p>赛后民间数据测的成绩都在230-245这个范围</p>
+<h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><ol>
+<li>整体上心态很差，太紧张了，由于心态引起了很多失误</li>
+<li>D1T1没分析好需求就开始写线段树，浪费10分钟</li>
+<li>做D1T2的时候不太灵活，没想到完全背包，说明对于完全背包还是不够熟练，白丢70分</li>
+<li>D1T3很尽力地打了部分分，但是读错题还是说明心态太差以及不够细心</li>
+<li>D2T1很紧张地没根据时间复杂度做题，结果浪费啷个小时</li>
+<li>D2T2直接略过好像是对的，我确实是做不出来。数学太差以后要恶补</li>
+<li>D2T3心态崩到写不出暴力</li>
+</ol>
+<p>主要的问题还是说考场上太紧张了，现在分析一下，D2T3的50分暴力和D1T2的70分正解我状态好其实是可以拿到的。</p>
+<p>不过好在这次除了D2T3的暴力，其他的都没有写挂（至少民间数据是这样）</p>
+<p>回去的路上团长给我说如果这是场模拟赛的话，我肯定心态就会好很多，分数也会高很多</p>
+<p>想想挺有道理的，今年NOIP我最大的问题就是心态。考试的时候想的太多了，太想拿成绩证明一下自己，然后负担很重紧张也就在所难免。</p>
+<p>希望明年能放松点好好发挥吧。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>看一眼这篇文章，写得有点乱</p>
+<p>鄙人文笔不好，而且思维还有点混乱，但还是想写一篇总结&amp;游记&amp;反思性质的文章纪念一下第一次参加NOIP提高组，所以还是发表挂上吧。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Logey
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://logey.gitee.io/noip2018/" title="noip2018总结与反思">https://logey.gitee.io/noip2018/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E6%B8%B8%E8%AE%B0/" rel="tag"># 游记</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/November-First/" rel="prev" title="【LYOI】20181101 Solution">
+                  <i class="fa fa-chevron-left"></i> 【LYOI】20181101 Solution
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/king-of-hotels/" rel="next" title="【LuoguP1402】酒店之王">
+                  【LuoguP1402】酒店之王 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Logey</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+      <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
