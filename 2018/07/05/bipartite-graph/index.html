@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"logey.gitee.io","root":"/","scheme":"Mist","version":"8.0.1","exturl":false,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="二分图又称二部图，是图论中一种特殊模型。对于一个无向图，如果可以把他的顶点分为两个互不相交的子集，并且图中的每一条边，所关联的两个顶点都分别属于两个不同的顶点集，则称该图为二分图。显然二分图中不存在奇数环，如果出现的话无法被划分到任何集合里。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二分图学习笔记">
+<meta property="og:url" content="https://logey.gitee.io/2018/07/05/bipartite-graph/index.html">
+<meta property="og:site_name" content="Logey&#39;s Blog">
+<meta property="og:description" content="二分图又称二部图，是图论中一种特殊模型。对于一个无向图，如果可以把他的顶点分为两个互不相交的子集，并且图中的每一条边，所关联的两个顶点都分别属于两个不同的顶点集，则称该图为二分图。显然二分图中不存在奇数环，如果出现的话无法被划分到任何集合里。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2018/07/05/5b3ddcb139508.png">
+<meta property="og:image" content="https://i.loli.net/2018/07/05/5b3ddcb144938.png">
+<meta property="og:image" content="https://i.loli.net/2018/07/05/5b3ddcb145f58.png">
+<meta property="og:image" content="https://i.loli.net/2018/07/05/5b3ddcb14751d.png">
+<meta property="og:image" content="https://i.loli.net/2018/11/28/5bfe7f3bc0925.png">
+<meta property="article:published_time" content="2018-07-05T15:50:54.000Z">
+<meta property="article:modified_time" content="2018-11-29T17:34:15.692Z">
+<meta property="article:author" content="Logey">
+<meta property="article:tag" content="二分图">
+<meta property="article:tag" content="匈牙利算法">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2018/07/05/5b3ddcb139508.png">
+
+
+<link rel="canonical" href="https://logey.gitee.io/2018/07/05/bipartite-graph/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>二分图学习笔记 | Logey's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Logey's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Logey's Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/links" rel="section"><i class="fa fa-link fa-fw"></i>友链</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%A4%E6%96%AD"><span class="nav-number">1.</span> <span class="nav-text">判断</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">3.</span> <span class="nav-text">定义</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%B9%E9%85%8D"><span class="nav-number">3.1.</span> <span class="nav-text">匹配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8D"><span class="nav-number">3.2.</span> <span class="nav-text">最大匹配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E7%BE%8E%E5%8C%B9%E9%85%8D"><span class="nav-number">3.3.</span> <span class="nav-text">完美匹配</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">匈牙利算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%A4%E5%8F%89%E8%B7%AF"><span class="nav-number">4.1.</span> <span class="nav-text">交叉路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A2%9E%E5%B9%BF%E8%B7%AF"><span class="nav-number">4.2.</span> <span class="nav-text">增广路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E6%83%B3"><span class="nav-number">4.3.</span> <span class="nav-text">思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E6%B5%81%E7%A8%8B"><span class="nav-number">4.4.</span> <span class="nav-text">算法流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="nav-number">4.5.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E5%AE%9A%E4%B9%89"><span class="nav-number">4.6.</span> <span class="nav-text">相关定义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E7%82%B9%E8%A6%86%E7%9B%96%E6%95%B0"><span class="nav-number">4.6.1.</span> <span class="nav-text">最小点覆盖数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E7%8B%AC%E7%AB%8B%E9%9B%86"><span class="nav-number">4.6.2.</span> <span class="nav-text">最大独立集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E8%A6%86%E7%9B%96"><span class="nav-number">4.6.3.</span> <span class="nav-text">最小路径覆盖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E8%BE%B9%E8%A6%86%E7%9B%96"><span class="nav-number">4.6.4.</span> <span class="nav-text">最小边覆盖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E5%9B%A2"><span class="nav-number">4.6.5.</span> <span class="nav-text">最大团</span></a></li></ol></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Logey"
+      src="/images/yuyi.jpg">
+  <p class="site-author-name" itemprop="name">Logey</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Bad-End" title="gitHub → https:&#x2F;&#x2F;github.com&#x2F;Bad-End" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>gitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1192067795@qq.com" title="E-Mail → mailto:1192067795@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/bad-end-81/activities" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;bad-end-81&#x2F;activities" rel="noopener" target="_blank">Zhihu</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://codeforces.com/profile/Logey" title="Codeforces → http:&#x2F;&#x2F;codeforces.com&#x2F;profile&#x2F;Logey" rel="noopener" target="_blank"><i class="fa fa-code fa-fw"></i>Codeforces</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Bad_Endl" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Bad_Endl" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/profile.php?id=100022236052781" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;profile.php?id&#x3D;100022236052781" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://logey.gitee.io/2018/07/05/bipartite-graph/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/yuyi.jpg">
+      <meta itemprop="name" content="Logey">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Logey's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          二分图学习笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-07-05 15:50:54" itemprop="dateCreated datePublished" datetime="2018-07-05T15:50:54Z">2018-07-05</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2018-11-29 17:34:15" itemprop="dateModified" datetime="2018-11-29T17:34:15Z">2018-11-29</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>二分图又称二部图，是图论中一种特殊模型。对于一个无向图，如果可以把他的顶点分为两个互不相交的子集，并且图中的每一条边，所关联的两个顶点都分别属于两个不同的顶点集，则称该图为二分图。显然二分图中不存在奇数环，如果出现的话无法被划分到任何集合里。  </p>
+<a id="more"></a>
+
+<h1 id="判断"><a href="#判断" class="headerlink" title="判断"></a>判断</h1><p>通过 $dfs$ 或者 $bfs$ 对一张图染色（即染色法，共有两种颜色），对于每一条边，使其两个节点的颜色不同。当一个点的颜色已经被确定时，该结点的颜色与当前应该染的颜色冲突，则说明这张图不是二分图。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> color)</span> </span>&#123;<span class="comment">//u为当前遍历到的结点，color为该点应该染的颜色，用1， 2来表示</span></span><br><span class="line">    <span class="keyword">if</span> (col[u]) &#123;</span><br><span class="line">        <span class="keyword">if</span> (col[u] != color) <span class="keyword">return</span>;<span class="comment">//说明这张图不是二分图</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        col[u] = color;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> e = head[u]; e; e = edge[e].next) &#123;</span><br><span class="line">        <span class="keyword">int</span> v = edge[e].t;</span><br><span class="line">        dfs(v, <span class="number">3</span> - color);<span class="comment">//边的两个端点颜色不同</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h2 id="匹配"><a href="#匹配" class="headerlink" title="匹配"></a>匹配</h2><p>在图论中，一个「匹配」是一个边的集合，其中任意两条边都没有公共顶点。（如图三红边）<br><img src="https://i.loli.net/2018/07/05/5b3ddcb139508.png" alt="1.png"> <img src="https://i.loli.net/2018/07/05/5b3ddcb144938.png" alt="2.png">   <img src="https://i.loli.net/2018/07/05/5b3ddcb145f58.png" alt="3.png">   <img src="https://i.loli.net/2018/07/05/5b3ddcb14751d.png" alt="4.png"><br>相应的，属于「匹配」的边为匹配边，不属于匹配的边为为匹配的边。与匹配边相连的点为匹配点，反之则为未匹配点。  </p>
+<h2 id="最大匹配"><a href="#最大匹配" class="headerlink" title="最大匹配"></a>最大匹配</h2><p>一个图所有匹配中，所含匹配边数最多的匹配，称为这个图的最大匹配。例如图四所示的红边，注意一张图的最大匹配方案不一定唯一。 （见图四） </p>
+<h2 id="完美匹配"><a href="#完美匹配" class="headerlink" title="完美匹配"></a>完美匹配</h2><p>对于一张图的某个匹配来说，如果该图的所有点都是匹配点，那么称该匹配为该图的「完美匹配」（图四）。显然，完美匹配一定是最大匹配。  </p>
+<h1 id="匈牙利算法"><a href="#匈牙利算法" class="headerlink" title="匈牙利算法"></a>匈牙利算法</h1><p>一种求最大匹配的算法。  </p>
+<h2 id="交叉路"><a href="#交叉路" class="headerlink" title="交叉路"></a>交叉路</h2><p>从一个未匹配点出发，<strong>依次</strong>经过未匹配边、匹配边、未匹配边、匹配边……最终到达另一个点的路径。特别的，一条未匹配边与两个未匹配点组成的路径也是交叉路  </p>
+<h2 id="增广路"><a href="#增广路" class="headerlink" title="增广路"></a>增广路</h2><p>最后一个端点为未匹配点的交叉路。特别的，一条未匹配边与两个未匹配点组成的路径也是增广路。增广路的首尾两条边都是未匹配边，首尾两个点都是未匹配点，并且边数一定是奇数。既然是奇数，那么增广路中的未匹配边一定比匹配边多一条。  </p>
+<h2 id="思想"><a href="#思想" class="headerlink" title="思想"></a>思想</h2><p>根据增广路中未匹配边比匹配边多一条的性质，那么只要把增广路中的边的身份翻转，得到的新的匹配中的边数就会多一。因此匈牙利算法实质上是在不断地找增广路来改进当前的匹配。由此得出，最大匹配中一定不存在增广路，如果有增广路的话，该匹配就可以改进，就不是最大匹配了。  </p>
+<h2 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h2><p>从二分图的一边开始，以每个点为起点进行 $dfs$ 或者 $bfs$ ，每当搜索到一条增广路时，结束搜索。那么显然以一个点为起点只能找到一条增广路。每找到一条增广路，匹配数便加一。注意实际实现的时候并没有把边标记为匹配边与未匹配边。连接两个匹配点的路径显然是匹配边。  </p>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> e = head[u]; e; e = edge[e].next) &#123;</span><br><span class="line">        <span class="keyword">int</span> v = edge[e].t;</span><br><span class="line">        <span class="keyword">if</span> (!vis[v]) &#123;<span class="comment">//vis数组用来标记该点有没有在本次dfs中被遍历过</span></span><br><span class="line">            vis[v] = <span class="literal">true</span>;<span class="comment">//更改状态，标记为遍历过</span></span><br><span class="line">            <span class="keyword">if</span> (!pre[v] ||dfs(pre[v])) &#123;<span class="comment">//pre数组记录该匹配边中的另一个点，</span></span><br><span class="line">                <span class="comment">//如果为空的话显然就是一条增广路。如果不为空，则遍历该数组中记录的点，并返回能否找到增广路</span></span><br><span class="line">                pre[v] = u;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;<span class="comment">//已经找到增广路了，结束遍历，返回结果。</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;<span class="comment">//未找到增广路</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="相关定义"><a href="#相关定义" class="headerlink" title="相关定义"></a>相关定义</h2><p><strong>最大匹配数</strong>：最大匹配的边数。<br><strong>最小点覆盖数</strong>：尽可能少地选择一些点，使得图中任意一条边都至少有一个顶点被选择。<br><strong>最小路径覆盖数</strong>：对于一张 $DAG$ ，选取最少的简单路径数，使得每个顶点只属于一条路径。路径可以仅由一个点组成。换言之，按照这样的路径能遍历到所有的点，且每个点仅被遍历一次。<br><strong>最小边覆盖</strong>：选取最少的边，使得图中任意一个点都是最小边覆盖集的邻接顶点，一条边只能覆盖两条边。（特别地，孤立点无法被任何边覆盖，所以含孤立点的图不存在边覆盖）<br><strong>最大独立集</strong>：选取最多的点，这些点彼此之间没有连边。<br><strong>最大团</strong>：当且仅当该子图是一张完全图（任意两个点之间都有边的图），且该子图不属于该图中的任何完全子图时为该图的最大团</p>
+<h3 id="最小点覆盖数"><a href="#最小点覆盖数" class="headerlink" title="最小点覆盖数"></a>最小点覆盖数</h3><p>最小点覆盖数 = 最大匹配数（ $\text{König}$ 定理）。<br>证明过于复杂，因此不在此贴出，请自行百度。</p>
+<h3 id="最大独立集"><a href="#最大独立集" class="headerlink" title="最大独立集"></a>最大独立集</h3><p>最大独立集的点数 = 点数 - 最大匹配数（或者最小点覆盖数）<br>这条定理可以用反证法证明，需要一点前置知识，阅读以下内容之前请务必理解如何证明最小点覆盖数 = 最大匹配这条定理，以及二分图的最小路径覆盖点集如何求出。<br>如果你已经准备好了，那请继续阅读。<br>把二分图的最小点覆盖集删除之后，剩余的点之间如果边，那么最小点覆盖集必然无法覆盖这些边。但是最小点覆盖集必然可以覆盖所有的边，所以上述与最小点覆盖集的性质冲突，故不成立，即最小点覆盖集以外的点之间必然没有边。所以：最大独立集的点数 = 点数 - 最小点覆盖数。又因为最小点覆盖数 = 最大匹配得，所以：最大独立集的点数 = 点数 - 最大匹配数。</p>
+<h3 id="最小路径覆盖"><a href="#最小路径覆盖" class="headerlink" title="最小路径覆盖"></a>最小路径覆盖</h3><p>最小路径覆盖数 = 点数 - 相应二分图的最大匹配数<br>把无向图的每个点拆成两个，分别属于构造出的二分图的两边（对于点 $x$ ，由 $x$ 拆得的左边的点与右边的点分别为$x_1， x_2$）。设有边 $(u, v)$ ，那么在二分图中便有边 $(u_1, v_2)$ 。因为原图是 $DAG$ ， 那么每条路径上的点除终点之外，都有且仅有一个后继。假设点都各自是一条路径，那么路径数与点数相同。二分图中每有一条匹配边，便会使一个点有且仅有一个后继。这也意味着这个点不能成为路径的终点。而路径有唯一的终点，所以每有一个匹配，路径便会少一。那么便能得到：最小路径覆盖数 = 点数 - 相应二分图的最大匹配数   </p>
+<h3 id="最小边覆盖"><a href="#最小边覆盖" class="headerlink" title="最小边覆盖"></a>最小边覆盖</h3><p>对于二分图：</p>
+<p>最小边覆盖数 = 点数 - 最大匹配数 = 最大独立集数。</p>
+<p>优先选择匹配边，因为选取最大匹配集中的点都会让两个点被覆盖。然后剩下的所有的边要么是连接两个匹配点，要么连接一个匹配点和一个未匹配点，选取后者。就是说选取完匹配边之后，再对于每个未覆盖点选取一条连接该点和一个覆盖点的边，这样的边集即为最小边覆盖集。</p>
+<p>所以一开始给出的式子也就可以推出了。</p>
+<p>最大匹配数 + （点数 - 2 * 最大匹配数） = 点数 - 最大匹配数</p>
+<p>（感谢<a target="_blank" rel="noopener" href="https://blog.aor.sd.cn/">wyh</a>聚聚用几句话就给我讲懂了证明）<img src="https://i.loli.net/2018/11/28/5bfe7f3bc0925.png" alt="img"></p>
+<h3 id="最大团"><a href="#最大团" class="headerlink" title="最大团"></a>最大团</h3><p>最大团点数 = 点数 - 相应的补图的最大匹配数<br>构造出该无向图的补图后，最大团实际上就是补图的最大独立集， 故有：最大团点数 = 点数 - 相应的补图的最大匹配数。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Logey
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://logey.gitee.io/2018/07/05/bipartite-graph/" title="二分图学习笔记">https://logey.gitee.io/2018/07/05/bipartite-graph/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E4%BA%8C%E5%88%86%E5%9B%BE/" rel="tag"># 二分图</a>
+              <a href="/tags/%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95/" rel="tag"># 匈牙利算法</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/06/23/tree-chain-split/" rel="prev" title="【模板】树链剖分">
+                  <i class="fa fa-chevron-left"></i> 【模板】树链剖分
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/07/15/squirrel/" rel="next" title="【JSOI2014】松鼠的新家">
+                  【JSOI2014】松鼠的新家 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Logey</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+      <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
